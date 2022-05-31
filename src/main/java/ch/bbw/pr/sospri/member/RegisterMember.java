@@ -17,4 +17,6 @@ public class RegisterMember {
 	private String lastname;
 	private String password;
 	private String confirmation;
+
+	private String message;
 }

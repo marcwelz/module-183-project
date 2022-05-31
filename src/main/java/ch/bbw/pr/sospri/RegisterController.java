@@ -27,11 +27,34 @@ public class RegisterController {
 	
 	@PostMapping("/get-register")
 	public String postRequestRegistMembers(RegisterMember registerMember, Model model) {
-		System.out.println("postRequestRegistMembers: registerMember");
-		System.out.println(registerMember);
+		System.out.println("postRequestRegistMembers");
 
-		memberservice.add(new Member(registerMember,registerMember.getPrename()+"03", "member"));
+		if(registrationValidate(registerMember)) {
+			System.out.println("registration failed");
+			model.addAttribute("message", registerMember.getMessage());
+			return "register";
+		}
+
+		String username = registerMember.getPrename()+"."+registerMember.getLastname();
+		Member tmpMember = new Member(registerMember, username, "member");
+		memberservice.add(tmpMember);
+		model.addAttribute("member", tmpMember);
 
 		return "registerconfirmed";
+	}
+
+	private boolean registrationValidate(RegisterMember registerMember) {
+		if(!registerMember.getPassword().equals(registerMember.getConfirmation())) {
+			registerMember.setMessage("Password and password confirmation is not equal");
+			return true;
+		}
+		if(memberservice.getByUserName(registerMember.getPrename().toLowerCase() +"."+registerMember.getLastname().toLowerCase()) != null) {
+			System.out.println("User allready exists, choose other first- or lastname.");
+			registerMember.setMessage("Username " + registerMember.getPrename().toLowerCase() + "." + registerMember.getLastname().toLowerCase() + " allready exists");
+
+			return true;
+		}
+
+		return false;
 	}
 }
