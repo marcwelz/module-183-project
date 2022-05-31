@@ -1,5 +1,6 @@
 package ch.bbw.pr.sospri;
 
+import ch.bbw.pr.sospri.member.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,9 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ch.bbw.pr.sospri.member.MemberService;
 import ch.bbw.pr.sospri.member.RegisterMember;
 /**
- * RegisterController
- * @author Peter Rutschmann
- * @version 26.03.2020
+ * @author marc.welz
+ * @version 31.05.2022
  */
 @Controller
 public class RegisterController {
@@ -30,8 +30,8 @@ public class RegisterController {
 		System.out.println("postRequestRegistMembers: registerMember");
 		System.out.println(registerMember);
 
-		//Hier ergänzen
-		
+		memberservice.add(new Member(registerMember,registerMember.getPrename()+"03", "member"));
+
 		return "registerconfirmed";
 	}
 }

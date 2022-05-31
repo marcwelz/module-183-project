@@ -11,16 +11,21 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- * A chat message
- * 
- * @author Peter Rutschmann
- * @version 25.03.2020
+ * @author marc.welz
+ * @version 31.05.2022
  */
+
 @Entity
 @Table(name = "message")
+@Setter
+@Getter
+@ToString
 public class Message {
 	@Id
     @GeneratedValue(generator = "generatorMessage", strategy = GenerationType.SEQUENCE)
@@ -37,41 +42,4 @@ public class Message {
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date origin ;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-
-	public Date getOrigin() {
-		return origin;
-	}
-
-	public void setOrigin(Date origin) {
-		this.origin = origin;
-	}
-
-	@Override
-	public String toString() {
-		return "Message [id=" + id + ", content=" + content + ", author=" + author + ", origin=" + origin + "]";
-	}
 }

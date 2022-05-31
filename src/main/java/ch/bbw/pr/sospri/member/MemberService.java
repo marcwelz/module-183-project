@@ -4,13 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 /**
- * MemberService
- * 
- * @author Peter Rutschmann
- * @version 09.04.2020
- * 
- * https://www.baeldung.com/transaction-configuration-with-jpa-and-spring
- * https://reflectoring.io/spring-security-password-handli
+ * @author marc.welz
+ * @version 31.05.2022
  */
 @Service
 @Transactional

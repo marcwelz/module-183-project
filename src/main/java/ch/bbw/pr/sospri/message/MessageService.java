@@ -3,10 +3,8 @@ package ch.bbw.pr.sospri.message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 /**
- * MessageService
- * 
- * @author Peter Rutschmann
- * @version 25.06.2020
+ * @author marc.welz
+ * @version 31.05.2022
  */
 @Service
 public class MessageService {

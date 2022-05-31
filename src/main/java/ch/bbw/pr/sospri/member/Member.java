@@ -1,5 +1,7 @@
 package ch.bbw.pr.sospri.member;
 
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,13 +12,16 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 /**
- * A member
- * 
- * @author Peter Rutschmann
- * @version 09.04.2020
+ * @author marc.welz
+ * @version 31.05.2022
  */
+
 @Entity
 @Table(name = "member")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Member {
 	@Id
     @GeneratedValue(generator = "generatorMember", strategy = GenerationType.SEQUENCE)
@@ -26,7 +31,7 @@ public class Member {
 	@NotEmpty (message = "prename may not be empty" )
 	@Size(min=2, max=512, message="Die Länge des Vornamens muss 2 bis 25 Zeichen sein.")
 	private String prename;
-	
+
 	@NotEmpty (message = "lastname may not be empty" )
 	@Size(min=2, max=20, message="Die Länge des Nachnamens 2 bis 25 Zeichen sein.")
 	private String lastname;
@@ -36,52 +41,11 @@ public class Member {
 	
 	private String authority;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getPrename() {
-		return prename;
-	}
-
-	public void setPrename(String prename) {
-		this.prename = prename;
-	}
-
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-	
-	
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
+	public Member(RegisterMember registerMember,String username, String authority) {
+		this.prename = registerMember.getPrename();
+		this.lastname = registerMember.getLastname();
+		this.password = registerMember.getPassword();
 		this.username = username;
-	}
-
-	public String getAuthority() {
-		return authority;
-	}
-
-	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
 

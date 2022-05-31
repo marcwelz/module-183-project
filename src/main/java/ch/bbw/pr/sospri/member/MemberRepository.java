@@ -2,10 +2,8 @@ package ch.bbw.pr.sospri.member;
 
 import org.springframework.data.repository.CrudRepository;
 /**
- * MemberRepository
- * 
- * @author Peter Rutschmann
- * @version 26.03.2020
+ * @author marc.welz
+ * @version 31.05.2022
  */
                                                        //Klasse, id-Typ
 public interface MemberRepository extends CrudRepository<Member, Long>{

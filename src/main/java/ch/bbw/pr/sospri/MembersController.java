@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import ch.bbw.pr.sospri.member.Member;
 import ch.bbw.pr.sospri.member.MemberService;
+
+import java.sql.SQLOutput;
+
 /**
- * UsersController
- * @author Peter Rutschmann
- * @version 28.04.2020
+ * @author marc.welz
+ * @version 31.05.2022
  */
 @Controller
 public class MembersController {
