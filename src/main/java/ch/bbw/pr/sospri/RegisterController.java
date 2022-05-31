@@ -2,13 +2,18 @@ package ch.bbw.pr.sospri;
 
 import ch.bbw.pr.sospri.member.Member;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import ch.bbw.pr.sospri.member.MemberService;
 import ch.bbw.pr.sospri.member.RegisterMember;
+
+import javax.validation.Valid;
+
 /**
  * @author marc.welz
  * @version 31.05.2022
@@ -26,8 +31,13 @@ public class RegisterController {
 	}
 	
 	@PostMapping("/get-register")
-	public String postRequestRegistMembers(RegisterMember registerMember, Model model) {
+	public String postRequestRegistMembers(@Valid RegisterMember registerMember, BindingResult bindingResult, Model model) {
 		System.out.println("postRequestRegistMembers");
+
+		if(bindingResult.hasErrors()) {
+			System.out.println("binding result has an error " + bindingResult.toString());
+			return "register";
+		}
 
 		if(registrationValidate(registerMember)) {
 			System.out.println("registration failed");
