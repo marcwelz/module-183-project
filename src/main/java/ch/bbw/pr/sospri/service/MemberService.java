@@ -4,8 +4,12 @@ import ch.bbw.pr.sospri.repository.MemberRepository;
 import ch.bbw.pr.sospri.model.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.security.SecureRandom;
+
 /**
  * @author marc.welz
  * @version 31.05.2022
@@ -22,6 +26,10 @@ public class MemberService{
 	}
 
 	public void add(Member member) {
+		BCryptPasswordEncoder bCryptPasswordEncoder =
+				new BCryptPasswordEncoder(10, new SecureRandom());
+		String encodedPassword = bCryptPasswordEncoder.encode(member.getPassword());
+		member.setPassword(encodedPassword);
 		repository.save(member);
 	}
 
