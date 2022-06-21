@@ -1,9 +1,13 @@
 package ch.bbw.pr.sospri.service;
 
+import ch.bbw.pr.sospri.model.MemberToUserMapper;
 import ch.bbw.pr.sospri.repository.MemberRepository;
 import ch.bbw.pr.sospri.model.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +21,7 @@ import java.security.SecureRandom;
 @Service
 @Transactional
 @Slf4j
-public class MemberService{
+public class MemberService implements UserDetailsService {
 	@Autowired
 	private MemberRepository repository;
 	
@@ -65,4 +69,11 @@ public class MemberService{
 		log.info("MemberService:getByUserName(), username does not exist in repository: " + username);
 		return null;
 	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Member member = getByUserName(username);
+		return MemberToUserMapper.toUserDetails(member);
+	}
+
 }

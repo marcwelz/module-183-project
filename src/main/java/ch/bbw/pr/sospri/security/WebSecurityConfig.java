@@ -26,21 +26,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    MemberService meberservice;
+    MemberService memberservice;
 
-    /*@Bean
+    @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider =
                 new DaoAuthenticationProvider();
         provider.setPasswordEncoder(SecurityConfigurator.passwordEncoder());
-        provider.setUserDetailsService((UserDetailsService) meberservice);
+        provider.setUserDetailsService(this.memberservice);
         return provider;
     }
 
     @Autowired
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.authenticationProvider(daoAuthenticationProvider());
-    }*/
+    }
 
     protected void configure(HttpSecurity http) throws Exception {
         log.info("Using default configure(HttpSecurity)." +
