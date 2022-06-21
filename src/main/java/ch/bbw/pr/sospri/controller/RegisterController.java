@@ -63,21 +63,19 @@ public class RegisterController {
 			return true;
 		}
 		if(memberservice.getByUserName(registerMember.getPrename().toLowerCase() +"."+registerMember.getLastname().toLowerCase()) != null) {
-			log.info("User allready exists, choose other first- or lastname.");
+			log.info("User already exists, choose other first- or lastname.");
 			registerMember.setMessage("Username " + registerMember.getPrename().toLowerCase() + "." + registerMember.getLastname().toLowerCase() + " allready exists");
 
 			return true;
 		}
 
-		//TODO deleted for easy testing
-
-		/*int passwordStrength = calculatePasswordStrength(registerMember.getPassword());
+		int passwordStrength = calculatePasswordStrength(registerMember.getPassword());
 		if(passwordStrength < 10) {
 			log.info("User allready exists, choose other first- or lastname.");
 			registerMember.setMessage("The Password is to weak. Password strength: " + passwordStrength + " but the strength should be at least 10");
 
 			return true;
-		}*/
+		}
 
 		return false;
 	}
