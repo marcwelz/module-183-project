@@ -60,6 +60,7 @@ public class MemberService implements UserDetailsService {
 	
 	public Member getByUserName(String username) {
 		Iterable<Member> memberitr = repository.findAll();
+		memberitr.forEach(System.out::println);
 		
 		for(Member member: memberitr){
 			if (member.getUsername().equals(username)) {

@@ -22,6 +22,7 @@ import javax.validation.constraints.Size;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Member {
 	@Id
     @GeneratedValue(generator = "generatorMember", strategy = GenerationType.SEQUENCE)
@@ -48,11 +49,4 @@ public class Member {
 		this.username = username;
 		this.authority = authority;
 	}
-
-	@Override
-	public String toString() {
-		return "Member [id=" + id + ", prename=" + prename + ", lastname=" + lastname + ", password=" + password
-				+ ", username=" + username + ", authority=" + authority + "]";
-	}
-
 }
