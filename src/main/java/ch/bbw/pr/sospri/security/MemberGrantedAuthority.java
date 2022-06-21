@@ -1,6 +1,6 @@
 package ch.bbw.pr.sospri.security;
 
-import lombok.Getter;w
+import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;

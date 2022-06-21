@@ -2,6 +2,7 @@ package ch.bbw.pr.sospri.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +23,9 @@ import javax.validation.constraints.Size;
 public class MembersController {
 	@Autowired
 	MemberService memberservice;
-	
+
 	@GetMapping("/get-members")
+	@PreAuthorize("hasRole('admin')")
 	public String getRequestMembers(Model model) {
 		log.info("getRequestMembers");
 		model.addAttribute("members", memberservice.getAll());
@@ -31,6 +33,7 @@ public class MembersController {
 	}
 	
 	@GetMapping("/edit-member")
+	@PreAuthorize("hasRole('admin')")
 	public String editMember(@RequestParam(name="id", required = true) long id, Model model) {
 		Member member = memberservice.getById(id);
 		log.info("editMember get: " + member);
@@ -39,6 +42,7 @@ public class MembersController {
 	}
 
 	@PostMapping("/edit-member")
+	@PreAuthorize("hasRole('admin')")
 	public String editMember(Member member, Model model) {
 		log.info("editMember post: edit member" + member);
 		Member value = memberservice.getById(member.getId());
@@ -49,6 +53,7 @@ public class MembersController {
 	}
 
 	@GetMapping("/delete-member")
+	@PreAuthorize("hasRole('admin')")
 	public String deleteMember(@RequestParam(name="id", required = true) long id, Model model) {
 		log.info("deleteMember: " + id);
 		memberservice.deleteById(id);
