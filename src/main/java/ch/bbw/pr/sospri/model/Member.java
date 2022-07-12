@@ -10,6 +10,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import org.jboss.aerogear.security.otp.api.Base32;
 
 /**
  * @author marc.welz
@@ -20,27 +21,34 @@ import javax.validation.constraints.Size;
 @Table(name = "member")
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 public class Member {
 	@Id
-    @GeneratedValue(generator = "generatorMember", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "generatorMember", initialValue=20)
+	@GeneratedValue(generator = "generatorMember", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "generatorMember", initialValue = 20)
 	private Long id;
-	
-	@NotEmpty (message = "prename may not be empty" )
-	@Size(min=2, max=512, message="Die Länge des Vornamens muss 2 bis 25 Zeichen sein.")
+
+	@NotEmpty(message = "prename may not be empty")
+	@Size(min = 2, max = 25, message = "The length of the first name must be 2 to 25 characters!")
 	private String prename;
 
-	@NotEmpty (message = "lastname may not be empty" )
-	@Size(min=2, max=20, message="Die Länge des Nachnamens 2 bis 25 Zeichen sein.")
+	@NotEmpty(message = "lastname may not be empty")
+	@Size(min = 2, max = 25, message = "The length of the last name must be 2 to 25 characters!")
 	private String lastname;
 
+	@NotEmpty(message = "password may not be empty")
 	private String password;
+
 	private String username;
-	
 	private String authority;
+
+	private boolean isUsing2FA = true;
+	private String secret;
+
+	public Member() {
+		super();
+		this.secret = Base32.random();
+	}
 
 	public Member(RegisterMember registerMember,String username, String authority) {
 		this.prename = registerMember.getPrename();

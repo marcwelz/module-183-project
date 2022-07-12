@@ -15,6 +15,7 @@
       $("#includedFooter").load("fragments/footer.html");
     });
   </script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -62,6 +63,10 @@
                           <div class="help-block with-errors"></div>
                         </div>
                       </div>
+                    </div>
+                    <div class="row">
+                      <div class="g-recaptcha col-sm-5" th:attr="data-sitekey=${@captchaSettings.getSite()}"></div>
+                      <span id="captchaError" class="alert alert-danger col-sm-4" style="display:none"></span>
                     </div>
                     <div class="row">
                       <div class="col-md-12">
